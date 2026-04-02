@@ -1,6 +1,28 @@
 {
-	"devDependencies": {
-		"oxlint": "^1.58.0",
-		"oxfmt": "^0.43.0"
-	}
+  "scripts": {
+    "prepare": "husky",
+    "lint": "oxlint",
+    "lint:write": "oxlint --fix",
+    "fmt": "oxfmt --write",
+    "fmt:write": "oxfmt --check",
+    "test": "vitest --passWithNoTests",
+    "test:run": "vitest run --passWithNoTests",
+    "verify": "pnpm lint && pnpm fmt:write && pnpm test:run"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "jsdom": "^29.0.1",
+    "lint-staged": "^16.4.0",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "vitest": "^4.1.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "oxfmt --write",
+      "oxlint --fix",
+      "oxfmt --write"
+    ],
+    "*.{json,md,yml,yaml}": "oxfmt --write"
+  }
 }
